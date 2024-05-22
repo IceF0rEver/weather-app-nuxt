@@ -1,13 +1,6 @@
 <template>
   <!-- Météo instantanée -->
-  <section  v-if="pending">
-    <div>Loading...</div>
-  </section>
-  <section v-else-if="error">
-    <div>Error: {{ error.message }}</div>
-  </section>
   <section
-    v-else
     class="bg-white bg-opacity-75 rounded-lg shadow p-5 mb-6 grow flex flex-col"
     style="flex-grow: 1"
   >
@@ -19,8 +12,8 @@
       style="flex-grow: 1"
     >
       <div>
-        <!-- <h3 class="text-lg font-semibold">{{ weatherData.name }}</h3>
-        <time class="text-sm text-gray-600" :datetime="weatherData.dt">
+        <!-- <h3 class="text-lg font-semibold">{{ weatherData.name }}</h3> -->
+        <!-- <time class="text-sm text-gray-600" :datetime="weatherData.dt">
           {{ new Date(weatherData.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}<br />
           {{ new Date(weatherData.dt * 1000).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) }}
         </time> -->
@@ -39,33 +32,32 @@
 </template>
 
 <script setup>
-import { useGeolocation } from '@vueuse/core'
+import { useGeolocation } from "@vueuse/core";
+// const { coords, isSupported } = useGeolocation();
 
-const { coords } = useGeolocation()
-const apiKey = 'a1141dd0573960bfdabff538fc1dc90c';
+const apiKey = "a1141dd0573960bfdabff538fc1dc90c";
 
 const lat = 50.6724352;
 const lon = 5.5246848;
 
-const weatherData = ref(null)
-const pending = ref(true)
-const error = ref(null)
+// const { data } = useFetch(
+//   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=fr&units=metric`
+// );
+// console.log(data);
 
-watchEffect(async () => {
-  if (coords.value.latitude && coords.value.longitude) {
-    try {
-      const { data } = await useFetch('weatherCurrentPosition', () =>
-        $fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.value.latitude}&lon=${coords.value.longitude}&appid=${apiKey}&lang=fr&units=metric`)
-      )
-      weatherData.value = data.value
-    } catch (err) {
-      error.value = err
-    } finally {
-      pending.value = false
-    }
+const fetchData = async () => {
+  const { coords, isSupported } = await useGeolocation();
+  if (isSupported) {
+    const { latitude: lat, longitude: lon } = coords;
+    const { data } = await useFetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=fr&units=metric`
+    );
+    console.log(data);
+  } else {
+    console.error("La géolocalisation n'est pas supportée.");
   }
-})
+};
+onMounted(fetchData);
 
 // const currentPosition = await useAsyncData("response", ()=> $fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.latitude}&appid=${apiKey}&lang=fr&units=metric`));
-
 </script>

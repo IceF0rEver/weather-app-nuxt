@@ -6,14 +6,14 @@
 const results = ref(null);
 const processedResults = ref(null);
 
-onMounted(async () => {
-  try {
-    results.value = await ForecastsStore.getByCoord();
-    processResults();
-  } catch (error) {
-    console.error(error.message);
-  }
-});
+// onMounted(async () => {
+//   try {
+//     results.value = await ForecastsStore.getByCoord();
+//     processResults();
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// });
 
 const processResults = () => {
   if (!results.value) return;
@@ -35,9 +35,17 @@ const processResults = () => {
 
       for (let j = 1; j < numberOfIntervals; j++) {
         const interpolatedData = {
-            dt: currentData.dt + (j * (nextData.dt - currentData.dt) / numberOfIntervals),
+          dt:
+            currentData.dt +
+            (j * (nextData.dt - currentData.dt)) / numberOfIntervals,
           main: {
-            temp: parseFloat((currentData.main.temp + (j * (nextData.main.temp - currentData.main.temp) / numberOfIntervals)).toFixed(2)),
+            temp: parseFloat(
+              (
+                currentData.main.temp +
+                (j * (nextData.main.temp - currentData.main.temp)) /
+                  numberOfIntervals
+              ).toFixed(2)
+            ),
           },
           weather: [...currentData.weather], // Vous pouvez également interpoler d'autres propriétés
         };
@@ -64,7 +72,11 @@ const processResults = () => {
     <h2 class="font-bold text-xl mb-4">Prochaines Heures</h2>
     <div class="overflow-x-auto">
       <div class="flex space-x-8">
-        <Hour v-for="processedResult in processedResults" :key="processedResult.dt" :processedResult="processedResult"></Hour>
+        <Hour
+          v-for="processedResult in processedResults"
+          :key="processedResult.dt"
+          :processedResult="processedResult"
+        ></Hour>
       </div>
     </div>
   </section>

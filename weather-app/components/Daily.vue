@@ -6,14 +6,14 @@
 const results = ref(null);
 const processedResults = ref(null);
 
-onMounted(async () => {
-  try {
-    results.value = await ForecastsStore.getByCoord();
-    processResults();
-  } catch (error) {
-    console.error(error.message);
-  }
-});
+// onMounted(async () => {
+//   try {
+//     results.value = await ForecastsStore.getByCoord();
+//     processResults();
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// });
 
 const processResults = () => {
   if (!results.value) return;
@@ -50,7 +50,7 @@ const processResults = () => {
           temp_min: parseFloat(min.toFixed(1)),
           temp_max: parseFloat(max.toFixed(1)),
         },
-        icon: weatherIcons
+        icon: weatherIcons,
       };
       processedResults.value.push(interpolatedData);
 
@@ -60,9 +60,8 @@ const processResults = () => {
       weatherIcons = [];
     }
   }
-  processedResults.value.splice(0,1);
+  processedResults.value.splice(0, 1);
 };
-
 </script>
 
 <template>
@@ -71,7 +70,11 @@ const processResults = () => {
     <div class="overflow-x-auto">
       <div class="flex space-x-8">
         <!-- Afficher les prévisions journalières -->
-        <Day v-for="processedResult in processedResults" :key="processedResult.dt" :processedResult="processedResult"></Day>
+        <Day
+          v-for="processedResult in processedResults"
+          :key="processedResult.dt"
+          :processedResult="processedResult"
+        ></Day>
       </div>
     </div>
   </section>
