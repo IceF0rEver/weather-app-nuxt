@@ -5,12 +5,9 @@
     style="background-size: cover"
   >
     <!-- Météo instantanée -->
-    <!-- <Current @bgWeather="bgWeather"></Current> -->
-    <Current></Current>
+    <Current @bgWeather="bgWeather"></Current>
 
     <!-- Prévisions par tranches de 2 heures -->
-    <Test />
-
     <Hourly></Hourly>
 
     <!-- Prévisions pour les jours suivants -->
