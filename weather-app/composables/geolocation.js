@@ -8,7 +8,7 @@ function getCurrentPosition() {
     });
 }
 
-export const GeoLocationStore = reactive({
+export const GeoLocation = reactive({
     getCoords: async function() {
         try {
             const position = await getCurrentPosition();
