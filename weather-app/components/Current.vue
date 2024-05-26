@@ -50,14 +50,17 @@
 </template>
 
 <script setup>
-import { GeoLocationStore } from "~/composables/geolocation.js";
+import { GeoLocation } from "~/composables/geolocation.js";
 
-const apiKey = "a1141dd0573960bfdabff538fc1dc90c";
+// const apiKey = "a1141dd0573960bfdabff538fc1dc90c";
+const apiKey = useRuntimeConfig().public.API_KEY;
+console.log(apiKey)
 
-const coords = await GeoLocationStore.getCoords();
-const { data } = useFetch(
-  `https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&lang=fr&units=metric`
-);
+
+const coords = await GeoLocation.getCoords();
+// const { data } = useFetch(
+//   `https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&lang=fr&units=metric`
+// );
 
 // const currentPosition = await useAsyncData("response", ()=> $fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.latitude}&appid=${apiKey}&lang=fr&units=metric`));
 </script>

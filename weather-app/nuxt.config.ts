@@ -22,5 +22,10 @@ export default defineNuxtConfig({
         { code: "fr", name: "Français", file: "fr.json"},
         { code: "en", name: "English", file: "en.json" },
     ],
-  }
+  },
+  runtimeConfig: {
+    public: {
+      API_KEY: process.env.API_KEY
+    },
+  },
 })
