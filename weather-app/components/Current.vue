@@ -1,20 +1,19 @@
 <template>
-  <!-- Météo instantanée -->
   <section
     v-if="data"
-    class="bg-white bg-opacity-75 rounded-lg shadow p-5 mb-6 grow flex flex-col"
+    class="bg-white dark:bg-black dark:bg-opacity-80 bg-opacity-75 rounded-lg shadow p-5 mb-6 grow flex flex-col"
     style="flex-grow: 1"
   >
     <header class="mb-4">
-      <h2 class="font-bold text-xl">Météo Instantanée</h2>
+      <h2 class="font-bold text-xl dark:text-gray-50">Météo Instantanée</h2>
     </header>
     <article
       class="flex items-center justify-between grow"
       style="flex-grow: 1"
     >
       <div>
-        <h3 class="text-lg font-semibold">{{ data.name }}</h3>
-        <time class="text-sm text-gray-600" :datetime="data.dt">
+        <h3 class="text-lg font-semibold dark:text-gray-50">{{ data.name }}</h3>
+        <time class="text-sm text-gray-600 dark:text-gray-300" :datetime="data.dt">
           {{
             new Date(data.dt * 1000).toLocaleTimeString([], {
               hour: "2-digit",
@@ -32,8 +31,8 @@
       </div>
       <div class="flex">
         <div class="text-right">
-          <p class="text-5xl">{{ data.main.temp.toFixed(0) }}°C</p>
-          <p class="text-lg text-gray-600">{{ data.weather[0].description }}</p>
+          <p class="text-5xl dark:text-gray-50">{{ data.main.temp.toFixed(0) }}°C</p>
+          <p class="text-lg text-gray-600 dark:text-gray-300">{{ data.weather[0].description }}</p>
         </div>
         <div class="ml-2 w-20 h-20 bg-blue-300 rounded-full">
           <img
@@ -49,7 +48,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { GeoLocation } from "~/composables/geolocation.js";
 
 const { $forecast } = useNuxtApp()

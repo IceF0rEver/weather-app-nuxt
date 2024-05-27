@@ -12,6 +12,8 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/i18n",
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    'nuxt-icon',
   ],
   i18n: {
     lazy: true,
@@ -31,4 +33,9 @@ export default defineNuxtConfig({
   plugins: [
     '~/plugins/forecasts.js'
   ],
+  colorMode: {
+    classSuffix: '',
+    preference: 'light',
+    fallback: 'light'
+  },  
 })
