@@ -1,4 +1,7 @@
 {
-    "welcome": "Welcome",
-    "hello": "Hello"
+  "welcome": "Welcome",
+  "hello": "Hello",
+  "title": {
+    "current": "Instant Weather"
   }
+}

@@ -4,16 +4,21 @@
   class="mx-auto min-h-screen flex flex-col pb-24"
   style="background-size: cover"
 >
-<div class="absolute w-full h-full dark:bg-black dark:opacity-50"></div>
-    <DarkMode></DarkMode>
-    <!-- Météo instantanée -->
-    <Current @bgWeather="bgWeather"></Current>
-
-    <!-- Prévisions par tranches de 2 heures -->
-    <Hourly></Hourly>
-
-    <!-- Prévisions pour les jours suivants -->
-    <Daily></Daily>
+    <div class="absolute w-full h-full dark:bg-black dark:opacity-50"></div>
+    <div class="flex flex-row px-4 pt-4">
+      <ChangeLang/>
+      <DarkMode/>
+    </div>
+    <div class="flex flex-col p-4">
+      <!-- Météo instantanée -->
+      <Current @bgWeather="bgWeather"></Current>
+      
+      <!-- Prévisions par tranches de 2 heures -->
+      <Hourly></Hourly>
+      
+      <!-- Prévisions pour les jours suivants -->
+      <Daily></Daily>
+    </div>
 
     <div class="fixed inset-x-0 bottom-0 pb-4 flex justify-center">
       <NuxtLink :to="localePath({ name: 'favorites' })">

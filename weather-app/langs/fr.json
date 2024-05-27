@@ -1,4 +1,7 @@
 {
-    "welcome": "Bienvenue",
-    "hello": "Bonjour"
+  "welcome": "Bienvenue",
+  "hello": "Bonjour",
+  "title": {
+    "current": "Météo Instantanée"
   }
+}

@@ -5,7 +5,7 @@
     style="flex-grow: 1"
   >
     <header class="mb-4">
-      <h2 class="font-bold text-xl dark:text-gray-50">Météo Instantanée</h2>
+      <h2 class="font-bold text-xl dark:text-gray-50"> {{$t('title.current')}}</h2>
     </header>
     <article
       class="flex items-center justify-between grow"
