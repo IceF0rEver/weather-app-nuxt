@@ -1,6 +1,5 @@
 <script setup>
-// import Favorite from "./Favorite.vue";
-// import { LocalStore } from "../stores/local.js";
+import { LocalStorage } from "~/composables/local.js";
 </script>
 
 <template>
@@ -8,7 +7,7 @@
         <h2 class="font-bold text-xl mb-4 dark:text-gray-50">{{$t('title.favorites')}}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Exemple de localisation favorite -->
-            <!-- <Favorite v-for="city in LocalStore.findAll()" :key="city.cityName && city.countryName" :city="city"></Favorite> -->
+            <!-- <Favorite v-for="city in LocalStorage.findAll()" :key="city.city && city.country"></Favorite> -->
         </div>
       </section>
 </template>

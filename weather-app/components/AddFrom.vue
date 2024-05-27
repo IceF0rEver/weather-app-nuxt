@@ -6,15 +6,32 @@ const { locale } = useI18n();
 
 const cityName = ref("");
 
-const data = await $forecast.getByLocation(cityName.value, locale);
+const getCoord = async () => {
+  try {
+    const data = await $forecast.getByLocation(cityName.value, locale);
 
-  const cityData = {
-  cityCoord: data.city.coord,
-  cityName: data.city.name,
-  countryName: data.city.country,
-  };
-  LocalStorage.addOne(cityData); 
+    const cityData = {
+      latitude: data.city.coord,
+      longitude: data.city.coord,
+      city: data.city.name,
+      country: data.city.country,
+    };
+    LocalStorage.addOne(cityData);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
+// const data = await $forecast.getByLocation(cityName.value, locale);
+// console.log(data);
+// if (data) {
+//   const cityData = {
+//   cityCoord: data.city.coord,
+//   cityName: data.city.name,
+//   countryName: data.city.country,
+//   };
+//   LocalStorage.addOne(cityData); 
+// }
 </script>
 
 <template>
