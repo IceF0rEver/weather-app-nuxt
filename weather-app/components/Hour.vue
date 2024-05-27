@@ -1,12 +1,3 @@
-<script setup>
-// import { defineProps } from 'vue';
-
-const props = defineProps({
-  processedResult: Object,
-});
-
-</script>
-
 <template>
   <div class="text-center">
     <p class="text-lg">
@@ -16,8 +7,19 @@ const props = defineProps({
     </p>
     <div class="w-10 h-10 bg-blue-300 rounded-full mx-auto my-2">
       <img :src="'https://openweathermap.org/img/wn/' + processedResult.weather[0].icon + '@2x.png'">
-
     </div>
-    <p class="text-lg">{{ processedResult.main.temp.toFixed(1) }}°C</p>
+    <p class="text-lg">{{ processedResult.main.temp.toFixed(0) }}°C</p>
   </div>
 </template>
+
+<script setup lang="ts">
+interface ProcessedResult {
+  dt: any;
+  weather: Array<{ icon: string }>;
+  main: { temp: number };
+}
+
+const props = defineProps<{
+  processedResult: ProcessedResult;
+}>();
+</script>
