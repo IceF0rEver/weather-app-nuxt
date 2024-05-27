@@ -1,27 +1,20 @@
 <script setup>
-import { GeoLocation } from "~/composables/geolocation.js";
-const coords = await GeoLocation.getCoords();
+import { LocalStorage } from "~/composables/local.js";
 
-// import { ref } from "vue";
-// import { ForecastsStore } from "../stores/forecasts.js";
-// import { LocalStore } from "../stores/local.js";
+const { $forecast } = useNuxtApp();
+const { locale } = useI18n();
 
 const cityName = ref("");
 
-// const getCoord = async () => {
-//   try {
-//     const data = await ForecastsStore.getByLocation(cityName.value);
+const data = await $forecast.getByLocation(cityName.value, locale);
 
-//     const cityData = {
-//       cityCoord: data.city.coord,
-//       cityName: data.city.name,
-//       countryName: data.city.country,
-//     };
-//     LocalStore.addOne(cityData);
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// };
+  const cityData = {
+  cityCoord: data.city.coord,
+  cityName: data.city.name,
+  countryName: data.city.country,
+  };
+  LocalStorage.addOne(cityData); 
+
 </script>
 
 <template>
@@ -48,7 +41,7 @@ const cityName = ref("");
         {{$t('button.add')}}
         </button>
         <button 
-          @click="LocalStore.addCurrentToCities"
+          @click="LocalStorage.addCurrentToCities"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
         >
