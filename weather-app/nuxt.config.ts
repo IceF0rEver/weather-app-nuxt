@@ -28,4 +28,7 @@ export default defineNuxtConfig({
       API_KEY: process.env.API_KEY
     },
   },
+  plugins: [
+    '~/plugins/forecasts.js'
+  ],
 })

@@ -1,32 +1,30 @@
-import {Coords} from "~/composables/coord.js";
-
-export function useforecast() {
-    const apiKey = useRuntimeConfig().public.API_KEY;
+export default defineNuxtPlugin((nuxtApp) => {
+  const apiKey = useRuntimeConfig().public.API_KEY
   
-    async function getCurrent() {
-        const response = await useFetch(`https://api.openweathermap.org/data/2.5/weather?lat=${Coords.latitude}&lon=${Coords.longitude}&appid=${apiKey}&lang=fr&units=metric`)
-        return response.json()
-    }
-  
-    async function getByCoord() {
-        const response = await useFetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${Coords.latitude}&lon=${Coords.longitude}&appid=${apiKey}&lang=fr&units=metric`)
-        return response.json()
-    }
-
-    async function getByLocation(country) {
-        const response = await useFetch(`https://api.openweathermap.org/data/2.5/forecast?q=${country}&appid=${apiKey}&lang=fr&units=metric`)
-        return response.json()
-    }
-
-    async function getLocationByActualPosition() {
-        const response = await useFetch(`https://api.openweathermap.org/data/2.5/weather?lat=${Coords.currentLatitude}&lon=${Coords.currentLongitude}&appid=${apiKey}&lang=fr&units=metric`)
-        return response.json()
-    }
-  
-    return {
-        getCurrent,
-        getByCoord,
-        getByLocation,
-        getLocationByActualPosition,
-    }
+  const getCurrent = (latitude, longitude) => {
+    const { data } = useFetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=fr&units=metric`)
+    return data
   }
+
+  const getByCoord = (latitude, longitude) => {
+    const { data } = useFetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=fr&units=metric`)
+    return data
+  }
+
+  const getByLocation = (country) => {
+    const { data } = useFetch(`https://api.openweathermap.org/data/2.5/forecast?q=${country}&appid=${apiKey}&lang=fr&units=metric`)
+    return data
+  }
+
+  const getLocationByActualPosition = (latitude, longitude) => {
+    const { data } = useFetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=fr&units=metric`)
+    return data
+  }
+
+  nuxtApp.provide('forecast', {
+    getCurrent,
+    getByCoord,
+    getByLocation,
+    getLocationByActualPosition,
+  })
+})
