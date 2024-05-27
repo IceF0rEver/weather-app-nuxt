@@ -1,9 +1,10 @@
 <template>
-  <div
-    :style="{ background: 'url(/images/' + img + ')', opacity: '0.8' }"
-    class="mx-auto p-4 min-h-screen flex flex-col pb-16 dark:bg-black"
-    style="background-size: cover"
-  >
+<div
+  :style="{ background: 'url(/images/' + img + ')'}"
+  class="mx-auto min-h-screen flex flex-col pb-24"
+  style="background-size: cover"
+>
+<div class="absolute w-full h-full dark:bg-black dark:opacity-50"></div>
     <DarkMode></DarkMode>
     <!-- Météo instantanée -->
     <Current @bgWeather="bgWeather"></Current>

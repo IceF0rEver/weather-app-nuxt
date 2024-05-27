@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row items-center justify-end p-4 gap-2">
+    <div class=" z-10 flex flex-row items-center justify-start p-4 gap-2">
         <Icon name="material-symbols:light-mode-outline" class="text-black" size="25" />
       <label class="inline-flex items-center cursor-pointer">
         <input type="checkbox" class="sr-only peer" @click="toggleTheme" :checked="colorMode.preference === 'dark'">

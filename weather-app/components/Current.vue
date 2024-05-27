@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="data"
-    class="bg-white dark:bg-black dark:bg-opacity-80 bg-opacity-75 rounded-lg shadow p-5 mb-6 grow flex flex-col"
+    class="z-10 bg-white dark:bg-black dark:bg-opacity-80 bg-opacity-75 rounded-lg shadow p-5 mb-6 grow flex flex-col"
     style="flex-grow: 1"
   >
     <header class="mb-4">
