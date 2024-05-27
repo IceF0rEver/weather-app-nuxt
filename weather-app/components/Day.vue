@@ -1,11 +1,3 @@
-<script setup>
-// import { defineProps } from 'vue';
-
-const props = defineProps({
-  processedResult: Object,
-});
-</script>
-
 <template>
       <div class="text-center">
         <p class="text-lg">
@@ -19,5 +11,14 @@ const props = defineProps({
         <p class="text-sm text-blue-500">{{processedResult.main.temp_min.toFixed(1)}}°C</p>
         <p class="text-sm text-red-600">{{processedResult.main.temp_max.toFixed(1)}}°C</p>
       </div>
-    
 </template>
+<script setup lang="ts">
+interface ProcessedResult {
+  dt: any;
+  icon: string;
+  main: { temp_min: number,temp_max: number };
+}
+const props = defineProps<{
+  processedResult: ProcessedResult;
+}>();
+</script>

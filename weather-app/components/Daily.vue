@@ -1,36 +1,20 @@
 <script setup>
-// import Day from "./Day.vue";
-// import { ref, onMounted } from 'vue';
-// import { ForecastsStore } from "../stores/forecasts.js";
+import { GeoLocation } from "~/composables/geolocation.js";
 
-const results = ref(null);
-const processedResults = ref(null);
+const { $forecast } = useNuxtApp();
 
-// onMounted(async () => {
-//   try {
-//     results.value = await ForecastsStore.getByCoord();
-//     processResults();
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// });
+const coords = await GeoLocation.getCoords();
+const results = await $forecast.getByCoord(coords.latitude, coords.longitude);
+console.log(results);
+const processedResults = ref([]);
 
-const processResults = () => {
-  if (!results.value) return;
-
-  // Initialisation du tableau traité
-  processedResults.value = [];
-
-  // Initialisation des variables pour la première journée
+if (results.value) {
   let min = 100.0;
   let max = 0.0;
   let weatherIcons = "";
-
-  // Parcours des données de l'API
   for (let i = 0; i < results.value.list.length; i++) {
     const currentData = results.value.list[i];
 
-    // Mettre à jour les valeurs min et max pour la journée en cours
     if (currentData.main.temp_max > max) {
       max = currentData.main.temp_max;
     }
@@ -38,11 +22,9 @@ const processResults = () => {
       min = currentData.main.temp_min;
     }
 
-    // Ajouter l'icône météorologique si c'est 12h
     if (new Date(currentData.dt * 1000).getHours() === 13) {
       weatherIcons = currentData.weather[0].icon;
     }
-    // Vérifier si c'est la fin de la journée
     if (new Date(currentData.dt * 1000).getHours() === 22) {
       const interpolatedData = {
         dt: currentData.dt,
@@ -53,15 +35,14 @@ const processResults = () => {
         icon: weatherIcons,
       };
       processedResults.value.push(interpolatedData);
-
-      // Réinitialiser les variables pour une nouvelle journée
       min = 100.0;
       max = 0.0;
       weatherIcons = [];
     }
   }
   processedResults.value.splice(0, 1);
-};
+}
+console.log(processedResults);
 </script>
 
 <template>
