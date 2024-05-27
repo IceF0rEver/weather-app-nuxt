@@ -14,12 +14,16 @@ export const GeoLocation = reactive({
             const position = await getCurrentPosition();
             return { 
                 latitude: position.coords.latitude, 
-                longitude: position.coords.longitude 
+                longitude: position.coords.longitude,
+                city:'',
+                country:'',
             };
         } catch (err) {
             return {
                 latitude: 50.8504, 
-                longitude: 4.3488
+                longitude: 4.3488,
+                city:'',
+                country:'',
             };
         }
     }

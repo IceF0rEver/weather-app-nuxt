@@ -4,6 +4,15 @@
   "title": {
     "current": "Instant Weather",
     "daily": "Next Days",
-    "hourly": "Next Hours"
+    "hourly": "Next Hours",
+    "favorites": "Your Favorite Locations",
+    "addLocation": "Add a Location"
+  },
+  "label": {
+    "addLocation": "Location Name"
+  },
+  "button": {
+    "add": "Add",
+    "addCurrentLocation": "Add current position"
   }
 }

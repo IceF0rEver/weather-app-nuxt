@@ -13,7 +13,7 @@
       <!-- Météo instantanée -->
       <Current @bgWeather="bgWeather"></Current>
       
-      <!-- Prévisions par tranches de 2 heures -->
+      <!-- Prévisions par tranches de 1 heures -->
       <Hourly></Hourly>
       
       <!-- Prévisions pour les jours suivants -->

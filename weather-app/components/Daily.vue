@@ -5,7 +5,7 @@ const { $forecast } = useNuxtApp();
 
 const coords = await GeoLocation.getCoords();
 const results = await $forecast.getByCoord(coords.latitude, coords.longitude);
-console.log(results);
+// console.log(results);
 const processedResults = ref([]);
 
 if (results.value) {
@@ -42,7 +42,7 @@ if (results.value) {
   }
   processedResults.value.splice(0, 1);
 }
-console.log(processedResults);
+// console.log(processedResults);
 </script>
 
 <template>

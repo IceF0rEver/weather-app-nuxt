@@ -21,7 +21,7 @@
             })
           }}<br />
           {{
-            new Date(data.dt * 1000).toLocaleDateString("fr-FR", {
+            new Date(data.dt * 1000).toLocaleDateString(locale, {
               day: "numeric",
               month: "short",
               year: "numeric",
@@ -50,10 +50,16 @@
 
 <script setup lang="ts">
 import { GeoLocation } from "~/composables/geolocation.js";
+import { LocalStorage } from "~/composables/local.js";
 
-const { $forecast } = useNuxtApp()
+
+const { $forecast } = useNuxtApp();
+const { locale } = useI18n();
 
 const coords = await GeoLocation.getCoords();
-const data = await $forecast.getCurrent(coords.latitude, coords.longitude)
-
+const data = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
+LocalStorage.addCurrent(coords);
+watch(locale, () => {
+  console.log(locale.value);
+});
 </script>

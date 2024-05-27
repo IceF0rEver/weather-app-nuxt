@@ -4,6 +4,15 @@
   "title": {
     "current": "Météo Instantanée",
     "daily": "Prochains Jours",
-    "hourly": "Prochaines Heures"
+    "hourly": "Prochaines Heures",
+    "favorites": "Vos Localisations Favorites",
+    "addLocation": "Ajouter une Localisation"
+  },
+  "label": {
+    "addLocation": "Nom de la Localisation"
+  },
+  "button": {
+    "add": "Ajouter",
+    "addCurrentLocation": "Ajouter la position actelle"
   }
 }

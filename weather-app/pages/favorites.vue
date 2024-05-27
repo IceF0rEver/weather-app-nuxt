@@ -3,19 +3,28 @@
     :style="{
       background: 'url(/images/' + img + ')',
     }"
-    class="mx-auto p-4 min-h-screen flex flex-col"
+    class="mx-auto min-h-screen flex flex-col"
     style="background-size: cover"
   >
-    <div class="fixed top-2 right-5 text-4xl">
-      <a href="" class="text-white"
-        ><NuxtLink :to="localePath({ name: 'index' })">x</NuxtLink></a
-      >
+  <div class="absolute w-full h-full dark:bg-black dark:opacity-50"></div>
+   <div class="flex justify-between px-4 pt-4">
+      <div class="flex">
+        <ChangeLang/>
+        <DarkMode/>
+      </div>
+      <div class=" z-10 flex items-center ">
+        <NuxtLink :to="localePath({ name: 'index' })">
+          <Icon name="akar-icons:cross" class="text-black dark:text-white" size="25" />
+        </NuxtLink>
+      </div>
     </div>
-    <!-- Formulaire d'ajout de localisation -->
-    <AddFrom></AddFrom>
+    <div class="flex flex-col p-4">
+      <!-- Formulaire d'ajout de localisation -->
+      <AddFrom></AddFrom>
 
-    <!-- Liste des localisations favorites -->
-    <FavoritesList></FavoritesList>
+      <!-- Liste des localisations favorites -->
+      <FavoritesList></FavoritesList>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
