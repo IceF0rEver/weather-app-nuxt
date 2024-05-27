@@ -2,6 +2,8 @@
   "welcome": "Bienvenue",
   "hello": "Bonjour",
   "title": {
-    "current": "Météo Instantanée"
+    "current": "Météo Instantanée",
+    "daily": "Prochains Jours",
+    "hourly": "Prochaines Heures"
   }
 }

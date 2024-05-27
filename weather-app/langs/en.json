@@ -2,6 +2,8 @@
   "welcome": "Welcome",
   "hello": "Hello",
   "title": {
-    "current": "Instant Weather"
+    "current": "Instant Weather",
+    "daily": "Next Days",
+    "hourly": "Next Hours"
   }
 }

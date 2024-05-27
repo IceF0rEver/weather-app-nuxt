@@ -48,7 +48,7 @@ console.log(processedResults);
 
 <template>
   <section class="z-10 bg-white dark:bg-black dark:bg-opacity-80 rounded-lg shadow p-5 mb-6">
-    <h2 class="font-bold dark:text-gray-50 text-xl mb-4">Prochaines Heures</h2>
+    <h2 class="font-bold dark:text-gray-50 text-xl mb-4">{{$t('title.hourly')}}</h2>
     <div class="overflow-x-auto">
       <div class="flex space-x-8">
         <Hour
