@@ -9,10 +9,9 @@ const cityName = ref("");
 const getCoord = async () => {
   try {
     const data = await $forecast.getByLocation(cityName.value, locale);
-
     const cityData = {
-      latitude: data.city.coord,
-      longitude: data.city.coord,
+      latitude: data.city.coord.lat,
+      longitude: data.city.coord.lon,
       city: data.city.name,
       country: data.city.country,
     };
@@ -21,17 +20,6 @@ const getCoord = async () => {
     console.error(error.message);
   }
 };
-
-// const data = await $forecast.getByLocation(cityName.value, locale);
-// console.log(data);
-// if (data) {
-//   const cityData = {
-//   cityCoord: data.city.coord,
-//   cityName: data.city.name,
-//   countryName: data.city.country,
-//   };
-//   LocalStorage.addOne(cityData); 
-// }
 </script>
 
 <template>

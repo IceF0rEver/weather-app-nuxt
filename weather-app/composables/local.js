@@ -10,20 +10,20 @@ export const LocalStorage = reactive({
     findAll: function() {
         return this.cities;
     },
-    addOne: function(cityData) {
+    addOne: function(data) {
         const isDuplicate = this.cities.some(
             (city) =>
-                city.cityName === cityData.cityName &&
-                city.countryName === cityData.countryName
+                city.city === data.city &&
+                city.country === data.country
         );
 
         if (!isDuplicate) {
-            this.cities.push(cityData);
+            this.cities.push(data);
             this.save();
         }
     },
-    removeOne: function(cityName, countryName) {
-        const index = this.cities.findIndex((city) => city.cityName === cityName && city.countryName === countryName);
+    removeOne: function(city, country) {
+        const index = this.cities.findIndex((city) => city.city === city && city.country === country);
         if (index !== -1) {
             this.cities.splice(index, 1);
             this.save();
@@ -34,12 +34,12 @@ export const LocalStorage = reactive({
             localStorage.setItem('cities', JSON.stringify(this.cities));
         }
     },
-    addCurrent: function(cityData) {
+    addCurrent: function(data) {
         if (process.client) {
             if (!Array.isArray(this.current)) {
                 this.current = [];
             }
-            this.current = [cityData];
+            this.current = [data];
             localStorage.setItem('current', JSON.stringify(this.current));
         }
     },
