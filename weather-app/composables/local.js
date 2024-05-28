@@ -39,7 +39,19 @@ export const LocalStorage = reactive({
             if (!Array.isArray(this.current)) {
                 this.current = [];
             }
-            this.current = [data];
+            if (this.current.length === 0) {
+                this.current = [data];
+            } else if(data.current != true && this.current.length <= 1) {
+                this.current.push(data);
+            }
+            localStorage.setItem('current', JSON.stringify(this.current));
+        }
+    },
+    removeCurrent: function() {
+        if (process.client) {
+            if (Array.isArray(this.current) && this.current.length === 2) {
+                this.current.splice(1, 1);
+            }
             localStorage.setItem('current', JSON.stringify(this.current));
         }
     },

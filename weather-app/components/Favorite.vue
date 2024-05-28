@@ -1,10 +1,10 @@
 <template>
   <div class="bg-gray-200 hover:bg-blue-500 hover:text-white rounded-lg p-4 flex justify-between items-center">
-    <div>
-      <NuxtLink :to="localePath({ name: 'index' })" @click="handleClick(city.latitude, city.logitude)">
+    <NuxtLink :to="localePath({ name: 'index' })"@click="handleClick(city.latitude, city.longitude, city.city, city.country)">
+      <div>
         {{ city.city }}, {{ city.country }}
-      </NuxtLink>
-    </div>
+      </div>
+    </NuxtLink>
     <div>
       <button
         @click="LocalStorage.removeOne(city.city, city.country)"
@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { LocalStorage } from "~/composables/local.js";
-import { Coords } from "~/composables/coords.js";
 const localePath = useLocalePath();
 
 const props = defineProps<Props>()
@@ -26,16 +25,16 @@ interface Props {
   city: Array<string>;
 }
 
-const handleClick = (latitude: null, longitude: null) => {
-  Coords.latitude = latitude;
-  Coords.longitude = longitude;
+const handleClick = (latitude: null, longitude: null, city: null, country: null) => {
+  const cityData = {
+      latitude: latitude,
+      longitude: longitude,
+      city: city,
+      country: country,
+      current: false
+    };
+  LocalStorage.removeCurrent();
+  LocalStorage.addCurrent(cityData);
+
 };
-
-// a utiliser pour passer de favoris à index
-
-// const test = useState("location", () => [
-//   latitude = city.latitude,
-//   longitude = city.longitude,
-// ]);
-
 </script>

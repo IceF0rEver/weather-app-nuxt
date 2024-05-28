@@ -14,6 +14,7 @@ const getCoord = async () => {
       longitude: data.city.coord.lon,
       city: data.city.name,
       country: data.city.country,
+      current: false,
     };
     LocalStorage.addOne(cityData);
   } catch (error) {

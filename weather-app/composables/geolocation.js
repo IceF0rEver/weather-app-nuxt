@@ -17,6 +17,7 @@ export const GeoLocation = reactive({
                 longitude: position.coords.longitude,
                 city:'',
                 country:'',
+                current: true,
             };
         } catch (err) {
             return {
@@ -24,6 +25,7 @@ export const GeoLocation = reactive({
                 longitude: 4.3488,
                 city:'',
                 country:'',
+                current: true,
             };
         }
     }

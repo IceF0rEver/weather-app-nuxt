@@ -37,6 +37,7 @@ const localePath = useLocalePath();
 
 const img = useState<string>("image", () => "sunny_day.jpg");
 
+
 const bgWeather = (main: any) => {
   switch (main) {
     case "Clouds":
