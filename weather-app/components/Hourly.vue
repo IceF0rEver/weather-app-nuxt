@@ -1,12 +1,22 @@
 <script setup>
 import { GeoLocation } from "~/composables/geolocation.js";
 
+const { locale } = useI18n();
 const { $forecast } = useNuxtApp();
 
-const coords = await GeoLocation.getCoords();
-const results = await $forecast.getByCoord(coords.latitude, coords.longitude);
-
 const processedResults = ref([]);
+const results = ref(null);
+
+onMounted(async () => {
+  if (!LocalStorage.checkCurrent()) {
+    const coords = await GeoLocation.getCoords();
+    const weatherData = await $forecast.getByCoord(coords.latitude, coords.longitude, locale);
+    results.value = weatherData;
+  } else {
+    const local = LocalStorage.findCurrent();
+    results.value = await $forecast.getByCoord(local.latitude, local.longitude, locale);
+  }
+});
 
 if (results.value) {
   for (let i = 0; i < results.value.list.length; i++) {

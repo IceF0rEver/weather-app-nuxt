@@ -1,12 +1,22 @@
 <script setup>
 import { GeoLocation } from "~/composables/geolocation.js";
 
+const { locale } = useI18n();
 const { $forecast } = useNuxtApp();
 
-const coords = await GeoLocation.getCoords();
-const results = await $forecast.getByCoord(coords.latitude, coords.longitude);
-// console.log(results);
+const results = ref(null);
 const processedResults = ref([]);
+
+onMounted(async () => {
+  if (!LocalStorage.checkCurrent()) {
+    const coords = await GeoLocation.getCoords();
+    const weatherData = await $forecast.getByCoord(coords.latitude, coords.longitude, locale);
+    results.value = weatherData;
+  } else {
+    const local = LocalStorage.findCurrent();
+    results.value = await $forecast.getByCoord(local.latitude, local.longitude, locale);
+  }
+});
 
 if (results.value) {
   let min = 100.0;
@@ -42,7 +52,6 @@ if (results.value) {
   }
   processedResults.value.splice(0, 1);
 }
-// console.log(processedResults);
 </script>
 
 <template>

@@ -52,21 +52,24 @@
 import { GeoLocation } from "~/composables/geolocation.js";
 import { LocalStorage } from "~/composables/local.js";
 
-const { $forecast } = useNuxtApp();
 const { locale } = useI18n();
+const { $forecast } = useNuxtApp();
 
-if (!LocalStorage.checkCurrent()) {
-  const coords = await GeoLocation.getCoords();
-  const data = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
-  coords['city'] = data.name;
-  coords['country'] = data.sys.country; 
-  LocalStorage.addCurrent(coords);
-  console.log(data.name)
-}else {
-  const local = LocalStorage.findCurrent();
-  const data = await $forecast.getCurrent(local.latitude, local.longitude, locale);
-  console.log(data.name)
-}
+const data = ref(null);
+
+onMounted(async () => {
+  if (!LocalStorage.checkCurrent()) {
+    const coords = await GeoLocation.getCoords();
+    const weatherData = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
+    coords['city'] = weatherData.name;
+    coords['country'] = weatherData.sys.country;
+    LocalStorage.addCurrent(coords);
+    data.value = weatherData;
+  } else {
+    const local = LocalStorage.findCurrent();
+    data.value = await $forecast.getCurrent(local.latitude, local.longitude, locale);
+  }
+});
 
 // watch(locale, () => {
 //   console.log(locale.value);
