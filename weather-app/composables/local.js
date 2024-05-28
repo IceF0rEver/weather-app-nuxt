@@ -58,6 +58,20 @@ export const LocalStorage = reactive({
     addCurrentToCities: function() {
         this.addOne(this.current[0]);
     },
+    checkCurrent: function() {
+        const isDuplicate = this.current.some(
+            (city) =>
+                city.current === true
+        );
+        if (isDuplicate) {
+            return true;
+        }else{
+            return false;
+        }
+    },
+    findCurrent: function() {
+        return this.current[1];
+    },
 });
 
 LocalStorage.initialize();

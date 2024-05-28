@@ -37,5 +37,6 @@ export default defineNuxtConfig({
     classSuffix: '',
     preference: 'light',
     fallback: 'light'
-  },  
+  },
+  ssr: false,  
 })

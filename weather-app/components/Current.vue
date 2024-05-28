@@ -55,14 +55,20 @@ import { LocalStorage } from "~/composables/local.js";
 const { $forecast } = useNuxtApp();
 const { locale } = useI18n();
 
-const coords = await GeoLocation.getCoords();
-const data = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
+if (!LocalStorage.checkCurrent()) {
+  const coords = await GeoLocation.getCoords();
+  const data = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
+  coords['city'] = data.name;
+  coords['country'] = data.sys.country; 
+  LocalStorage.addCurrent(coords);
+  console.log(data.name)
+}else {
+  const local = LocalStorage.findCurrent();
+  const data = await $forecast.getCurrent(local.latitude, local.longitude, locale);
+  console.log(data.name)
+}
 
-coords['city'] = data.name;
-coords['country'] = data.sys.country; 
-LocalStorage.addCurrent(coords);
-
-watch(locale, () => {
-  console.log(locale.value);
-});
+// watch(locale, () => {
+//   console.log(locale.value);
+// });
 </script>

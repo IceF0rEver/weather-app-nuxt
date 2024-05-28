@@ -56,6 +56,12 @@ const bgWeather = (main: any) => {
       img.value = "sunny_day.jpg";
   }
 };
+window.addEventListener('beforeunload', function () {
+    localStorage.removeItem('current');
+});
+window.addEventListener('unload', function () {
+    localStorage.removeItem('current');
+});
 </script>
 
 <style lang="scss" scoped></style>
