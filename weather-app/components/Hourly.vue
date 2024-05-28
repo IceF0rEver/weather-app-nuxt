@@ -52,8 +52,8 @@ if (results.value) {
     break;
   }
 }  
-console.log(processedResults);
 }
+// console.log(results);
 </script>
 
 <template>
