@@ -22,8 +22,8 @@ export const LocalStorage = reactive({
             this.save();
         }
     },
-    removeOne: function(city, country) {
-        const index = this.cities.findIndex((city) => city.city === city && city.country === country);
+    removeOne: function(cityName, countryName) {
+        const index = this.cities.findIndex((city) => city.city === cityName && city.country === countryName);
         if (index !== -1) {
             this.cities.splice(index, 1);
             this.save();

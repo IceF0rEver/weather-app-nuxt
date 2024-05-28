@@ -35,14 +35,6 @@
 <script setup lang="ts">
 const localePath = useLocalePath();
 
-// a utiliser pour passer de favoris à index
-// import { useGeolocation } from "@vueuse/core";
-// const { coords, isSupported } = useGeolocation();
-// const test = useState("location", () => [
-//   coords.value.latitude,
-//   coords.value.longitude,
-// ]);
-
 const img = useState<string>("image", () => "sunny_day.jpg");
 
 const bgWeather = (main: any) => {
