@@ -22,6 +22,9 @@
           />
         </div>
       </div>
+        <div class="dark:bg-white max-w-3xl">
+          <Chart />
+        </div>
     </div>
   </section>
 </template>
@@ -44,6 +47,8 @@ onMounted(async () => {
   }
   if (results.value) {
     processedResults.value = processWeatherData(results.value.list);
+    const test = new Date(processedResults.value[0].dt * 1000).toLocaleDateString(locale, { weekday: 'short', day: 'numeric' })
+    console.log(test)
   }
 });
 
