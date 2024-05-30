@@ -6,7 +6,7 @@
     class="mx-auto min-h-screen flex flex-col"
     style="background-size: cover"
   >
-  <div class="absolute w-full h-full dark:bg-black dark:opacity-50"></div>
+  <div class="absolute w-screen h-screen dark:bg-black dark:opacity-50"></div>
    <div class="flex justify-between px-4 pt-4">
       <div class="flex">
         <ChangeLang/>
