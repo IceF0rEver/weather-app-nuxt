@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@maptiler/sdk": "^2.0.3",
+    "@maptiler/weather": "^2.0.0",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/i18n": "^8.3.1",
     "@nuxtjs/tailwindcss": "^6.12.0",
