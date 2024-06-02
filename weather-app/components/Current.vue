@@ -64,6 +64,14 @@ onMounted(async () => {
     coords['city'] = weatherData.name;
     coords['country'] = weatherData.sys.country;
     LocalStorage.addCurrent(coords);
+    const cityData = {
+      latitude: coords['latitude'],
+      longitude: coords['longitude'],
+      city: weatherData.name,
+      country: weatherData.sys.country,
+      current: false
+    };
+    LocalStorage.addCurrent(cityData);
     data.value = weatherData;
   } else {
     const local = LocalStorage.findCurrent();
