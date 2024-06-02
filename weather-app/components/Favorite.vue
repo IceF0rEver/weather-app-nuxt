@@ -22,7 +22,7 @@ const localePath = useLocalePath();
 
 const props = defineProps<Props>()
 interface Props {
-  city: Array<string>;
+  city: Object;
 }
 
 const handleClick = (latitude: null, longitude: null, city: null, country: null) => {

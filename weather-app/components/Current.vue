@@ -57,10 +57,11 @@ const { $forecast } = useNuxtApp();
 
 const data = ref(null);
 
-onMounted(async () => {
+const fetchData = async () => {
   if (!LocalStorage.checkCurrent()) {
     const coords = await GeoLocation.getCoords();
     const weatherData = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
+    // console.log(locale.value)
     coords['city'] = weatherData.name;
     coords['country'] = weatherData.sys.country;
     LocalStorage.addCurrent(coords);
@@ -77,9 +78,11 @@ onMounted(async () => {
     const local = LocalStorage.findCurrent();
     data.value = await $forecast.getCurrent(local.latitude, local.longitude, locale);
   }
+};
+onMounted(fetchData);
+
+watch(locale, () => {
+  fetchData();
 });
 
-// watch(locale, () => {
-//   console.log(locale.value);
-// });
 </script>
