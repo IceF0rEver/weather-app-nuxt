@@ -16,15 +16,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     return await response.json();
   }
 
-  const getLocationByActualPosition = async (latitude, longitude, lang) => {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=${lang}&units=metric`)
-    return await response.json();
-  }
-
   nuxtApp.provide('forecast', {
     getCurrent,
     getByCoord,
     getByLocation,
-    getLocationByActualPosition,
   })
 })
