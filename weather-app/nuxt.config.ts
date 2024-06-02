@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-icon',
     "@nuxt/image",
-    "nuxt3-leaflet"
   ],
   i18n: {
     lazy: true,
@@ -29,7 +28,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      API_KEY: process.env.API_KEY
+      API_KEY: process.env.API_KEY,
+      API_MAP: process.env.API_MAP
     },
   },
   plugins: [
