@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     'nuxt-icon',
+    "@nuxt/image"
   ],
   i18n: {
     lazy: true,

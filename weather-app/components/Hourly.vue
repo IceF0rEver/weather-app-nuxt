@@ -1,19 +1,23 @@
 <template>
   <section class="z-10 bg-white dark:bg-black dark:bg-opacity-80 rounded-lg shadow p-5 mb-6">
-    <h2 class="font-bold dark:text-gray-50 text-xl mb-4">{{$t('title.hourly')}}</h2>
+    <h2 class="font-bold dark:text-gray-50 text-xl mb-4">{{$t('title.daily')}}</h2>
     <div class="overflow-x-auto">
       <div class="flex flex-col space-x-8">
-        <div class="dark:bg-white rounded-lg p-1 overflow-x-auto">
-          <Chart :labels="labelArray" :minData="minArray" :maxData="maxArray" class="sm:px-10 md:px-16 lg:px-20 pb-2"/>
+        <div class="dark:bg-white rounded-lg p-1">
+          <ChartHour :labels="labelArray" :maxData="maxArray" class="sm:px-10 md:px-16 lg:px-20 pb-2"/>
           <div class="flex justify-between bg-blue-300 rounded-lg">
             <div
             v-for="processedResult in processedResults"
             :key="processedResult.dt"
             >
-              <img
+              <NuxtImg 
               :src="`https://openweathermap.org/img/wn/${processedResult.icon}@4x.png`"
               alt="weather icon"
               />
+              <div class="flex content-center justify-center">
+                <Icon name="ic:twotone-water-drop" class="text-black" size="15" />
+                <p class="text-xs pb-2 text-black">{{ processedResult.humidity }}%</p>
+              </div>
             </div>
           </div>
         </div>
@@ -49,23 +53,24 @@ const maxArray = ref([]);
 const labelArray = ref([]);
 
 function processWeatherData(data) {
-  const dailyData = {};
+  const dailyData = [];
+  let count = 0;
 
   data.forEach(entry => {
-    if (!dailyData[entry.dt]) {
-      dailyData[entry.dt] = {
+    if (count < 6) {
+      dailyData.push({
         dt: entry.dt,
-        temp_min: entry.main.temp_min.toFixed(0),
         temp_max: entry.main.temp_max.toFixed(0),
         icon: entry.weather[0].icon,
-      };
+        humidity: entry.main.humidity.toFixed(0),
+      });
+      count++;
     }
   });
 
-  const processedData = Object.values(dailyData);
+  const processedData = dailyData.slice(0, 6);
 
   processedData.forEach(day => {
-    minArray.value.push(day.temp_min);
     maxArray.value.push(day.temp_max);
     labelArray.value.push(day.dt);
   });

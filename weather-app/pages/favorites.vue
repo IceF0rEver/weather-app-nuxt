@@ -1,10 +1,6 @@
 <template>
   <div
-    :style="{
-      background: 'url(/images/' + img + ')',
-    }"
-    class="mx-auto min-h-screen flex flex-col"
-    style="background-size: cover"
+    class="mx-auto min-h-screen flex flex-col dark:bg-gray-800 bg-gray-300"
   >
   <div class="absolute w-screen h-screen dark:bg-black dark:opacity-50"></div>
    <div class="flex justify-between px-4 pt-4">
@@ -29,7 +25,6 @@
 </template>
 <script setup lang="ts">
 const localePath = useLocalePath();
-const img = useState<string>("image");
 </script>
 
 <style lang="scss" scoped></style>

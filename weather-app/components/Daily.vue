@@ -4,7 +4,7 @@
     <div class="overflow-x-auto">
       <div class="flex flex-col space-x-8">
         <div class="dark:bg-white rounded-lg p-1">
-          <Chart :labels="labelArray" :minData="minArray" :maxData="maxArray" class="sm:px-10 md:px-16 lg:px-20 pb-2"/>
+          <ChartDay :labels="labelArray" :minData="minArray" :maxData="maxArray" class="sm:px-10 md:px-16 lg:px-20 pb-2"/>
           <div class="flex justify-between bg-blue-300 rounded-lg">
             <div
             v-for="processedResult in processedResults"
@@ -40,7 +40,6 @@ onMounted(async () => {
   }
   if (results.value) {
     processedResults.value = processWeatherData(results.value.list);
-    const test = new Date(processedResults.value[0].dt * 1000).toLocaleDateString(locale, { weekday: 'short', day: 'numeric' })
   }
 });
 
@@ -60,6 +59,9 @@ function processWeatherData(data) {
         temp_max: entry.main.temp_max.toFixed(0),
         icon: entry.weather[0].icon,
       };
+    } else {
+      dailyData[date].temp_min = Math.min(dailyData[date].temp_min, entry.main.temp_min).toFixed(0);
+      dailyData[date].temp_max = Math.max(dailyData[date].temp_max, entry.main.temp_max).toFixed(0);
     }
   });
 
