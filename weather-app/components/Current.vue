@@ -45,6 +45,9 @@
         </div>
       </div>
     </article>
+    <article class="pt-4">
+      <Map></Map>
+    </article>
   </section>
 </template>
 
@@ -61,7 +64,6 @@ const fetchData = async () => {
   if (!LocalStorage.checkCurrent()) {
     const coords = await GeoLocation.getCoords();
     const weatherData = await $forecast.getCurrent(coords.latitude, coords.longitude, locale);
-    // console.log(locale.value)
     coords['city'] = weatherData.name;
     coords['country'] = weatherData.sys.country;
     LocalStorage.addCurrent(coords);
