@@ -9,15 +9,17 @@
 <script setup>
 import { Map, MapStyle, config } from '@maptiler/sdk';
 import '@maptiler/sdk/dist/maptiler-sdk.css';
-import { RadarLayer } from '@maptiler/weather';
 import { LocalStorage } from "~/composables/local.js";
+import { RadarLayer } from "@maptiler/weather";
 const local = LocalStorage.findCurrent();
 
 const mapContainer = shallowRef(null);
 const map = shallowRef(null);
 
 onMounted(() => {
-  config.apiKey = useRuntimeConfig().public.API_MAP;
+  config.apiKey = useRuntimeConfig().public.API_MAP
+  const layer = new RadarLayer();
+  
 
   const initialState = { lng: local.longitude, lat: local.latitude, zoom: 11 };
 
@@ -25,21 +27,14 @@ onMounted(() => {
     container: mapContainer.value,
     style: MapStyle.STREETS,
     center: [initialState.lng, initialState.lat],
-    zoom: initialState.zoom
+    zoom: initialState.zoom,
+    layer: layer
   }));
-
-  // Ajouter la couche radar météo
-  const weatherLayer = new RadarLayer();
-  map.value.addLayer(weatherLayer);
-
-  // Optionnel : obtenir la valeur radar pour une coordonnée spécifique
-  const radarValue = weatherLayer.pickAt(local.latitude, local.longitude);
-  console.log('Radar value:', radarValue);
 
 }),
 onUnmounted(() => {
   map.value?.remove();
-});
+})
 </script>
 
 <style scoped>
