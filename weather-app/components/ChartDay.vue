@@ -40,7 +40,7 @@ const chartData = computed(() => ({
       backgroundColor: '#FF4500',
       borderColor: '#FF4500',
       data: props.maxData.map((max) => max),
-      tension: 0.0,
+      tension: 0.3,
       pointRadius: 0,
     },
     {
@@ -48,7 +48,7 @@ const chartData = computed(() => ({
       backgroundColor: '#00BFFF',
       borderColor: '#00BFFF',
       data:  props.minData.map((min) => min),
-      tension: 0.0,
+      tension: 0.3,
       pointRadius: 0,
     }
   ]

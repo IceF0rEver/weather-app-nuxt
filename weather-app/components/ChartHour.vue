@@ -36,10 +36,10 @@ const chartData = computed(() => ({
   datasets: [
     {
       label: 'Max',
-      backgroundColor: '#FF4500',
-      borderColor: '#FF4500',
+      backgroundColor: '#808080',
+      borderColor: '#808080',
       data: props.maxData.map((max) => max),
-      tension: 0.0,
+      tension: 0.3,
       pointRadius: 0,
     },
   ]
