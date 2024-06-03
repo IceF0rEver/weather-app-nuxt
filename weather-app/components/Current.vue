@@ -46,8 +46,7 @@
       </div>
     </article>
     <article class="pt-4">
-      <!-- <Map></Map> -->
-      <Test></Test>
+      <Map></Map>
     </article>
   </section>
 </template>
