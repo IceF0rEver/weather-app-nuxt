@@ -1,6 +1,6 @@
 <template>
   <div v-if="data" class="bg-gray-200 hover:bg-blue-500 hover:text-white rounded-lg p-4 flex justify-between items-center">
-    <NuxtLink :to="localePath({ name: 'index' })" @click="handleClick(city.latitude, city.longitude, city.city, city.country)">
+    <NuxtLink to="/" @click="handleClick(city.latitude, city.longitude, city.city, city.country)">
       <div>
         {{ city.city }}, {{ city.country }} - {{ data.main.temp.toFixed(0) }}°C
       </div>
@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { LocalStorage } from "~/composables/local.js";
-const localePath = useLocalePath();
 
 const data = ref(null);
 
