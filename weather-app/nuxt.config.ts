@@ -17,15 +17,18 @@ export default defineNuxtConfig({
     "@nuxt/image",
   ],
   i18n: {
-    lazy: true,
-    langDir: "langs", 
-    strategy: "no_prefix",
-    defaultLocale: "fr",
-    locales: [
-        { code: "fr", name: "Français", file: "fr.json"},
-        { code: "en", name: "English", file: "en.json" },
-    ],
+    vueI18n: './i18n.config.ts' 
   },
+  // i18n: {
+  //   lazy: true,
+  //   langDir: "langs", 
+  //   strategy: "no_prefix",
+  //   defaultLocale: "fr",
+  //   locales: [
+  //       { code: "fr", name: "Français", file: "fr.json"},
+  //       { code: "en", name: "English", file: "en.json" },
+  //   ],
+  // },
   runtimeConfig: {
     public: {
       API_KEY: process.env.API_KEY,

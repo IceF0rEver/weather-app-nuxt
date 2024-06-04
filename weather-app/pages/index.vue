@@ -19,7 +19,7 @@
     </div>
 
     <div class=" inset-x-0 bottom-0 pb-4 flex justify-center">
-      <NuxtLink :to="localePath({ name: 'favorites' })">
+      <NuxtLink to="/favorites">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white h-16 w-16 leading-3 rounded-full shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out text-4xl"
         >
@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-const localePath = useLocalePath();
 
 window.addEventListener('beforeunload', function () {
     localStorage.removeItem('current');

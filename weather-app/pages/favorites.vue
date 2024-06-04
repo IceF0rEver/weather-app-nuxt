@@ -9,7 +9,7 @@
         <DarkMode/>
       </div>
       <div class=" z-10 flex items-center ">
-        <NuxtLink :to="localePath({ name: 'index' })">
+        <NuxtLink to="/">
           <Icon name="akar-icons:cross" class="text-black dark:text-white" size="25" />
         </NuxtLink>
       </div>
